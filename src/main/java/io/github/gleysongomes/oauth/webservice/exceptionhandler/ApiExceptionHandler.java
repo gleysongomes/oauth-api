@@ -12,6 +12,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -35,9 +37,20 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	private MessageSource messageSource;
 
 	@Override
+	protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatus status,
+			WebRequest request) {
+		return handleBinding(ex, headers, status, request, ex.getBindingResult());
+	}
+
+	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
-		List<Problem.Object> objects = ex.getBindingResult().getAllErrors().stream().map(objectError -> {
+		return handleBinding(ex, headers, status, request, ex.getBindingResult());
+	}
+
+	private ResponseEntity<Object> handleBinding(Exception ex, HttpHeaders headers, HttpStatus status, WebRequest request,
+			BindingResult bindingResult) {
+		List<Problem.Object> objects = bindingResult.getAllErrors().stream().map(objectError -> {
 
 			String name = objectError instanceof FieldError ? ((FieldError) objectError).getField()
 					: objectError.getObjectName();
