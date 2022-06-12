@@ -17,9 +17,8 @@ import io.github.gleysongomes.oauth.exception.ValidacaoException;
 import io.github.gleysongomes.oauth.model.Grupo;
 import io.github.gleysongomes.oauth.model.Usuario;
 import io.github.gleysongomes.oauth.repository.GrupoRepository;
-import io.github.gleysongomes.oauth.repository.UsuarioRepository;
 import io.github.gleysongomes.oauth.service.GrupoService;
-import io.github.gleysongomes.oauth.util.ObjectMapperUtil;
+import io.github.gleysongomes.oauth.service.UsuarioService;
 
 @Service
 @Transactional(readOnly = true)
@@ -29,11 +28,11 @@ public class GrupoServiceImpl implements GrupoService {
 
 	private final GrupoRepository grupoRepository;
 
-	private final UsuarioRepository usuarioRepository;
+	private final UsuarioService usuarioService;
 
-	public GrupoServiceImpl(GrupoRepository grupoRepository, UsuarioRepository usuarioRepository) {
+	public GrupoServiceImpl(GrupoRepository grupoRepository, UsuarioService usuarioService) {
 		this.grupoRepository = grupoRepository;
-		this.usuarioRepository = usuarioRepository;
+		this.usuarioService = usuarioService;
 	}
 
 	@Override
@@ -43,16 +42,15 @@ public class GrupoServiceImpl implements GrupoService {
 			throw new ValidacaoException("Informe um grupo.");
 		}
 
-		Usuario usuarioCricao = usuarioRepository.findById(1L)
-				.orElseThrow(() -> new NaoEncontradoException("Usuário de criação não encontrado."));
+		Usuario usuarioCriacao = usuarioService.buscar(1L, "Usuário de criação não encontrado.");
 
 		try {
 			grupo.setDtCadastro(new Date());
-			grupo.setCdUsuarioCriacao(usuarioCricao.getCdUsuario());
+			grupo.setCdUsuarioCriacao(usuarioCriacao.getCdUsuario());
 
 			grupo = grupoRepository.save(grupo);
 		} catch (Exception e) {
-			log.debug("Erro ao adicionar grupo: {}.", ObjectMapperUtil.writeValueAsString(grupo));
+			log.debug("Erro ao adicionar grupo: {}.", grupo);
 			throw new ApiException("Erro ao adicionar grupo.", e);
 		}
 		return grupo;
@@ -65,8 +63,7 @@ public class GrupoServiceImpl implements GrupoService {
 			throw new ValidacaoException("Informe um grupo.");
 		}
 
-		Usuario usuarioAtualizacao = usuarioRepository.findById(1L)
-				.orElseThrow(() -> new NaoEncontradoException("Usuário de atualização não encontrado."));
+		Usuario usuarioAtualizacao = usuarioService.buscar(1L, "Usuário de atualização não encontrado.");
 
 		try {
 			grupo.setDtAtualizacao(new Date());
@@ -74,8 +71,8 @@ public class GrupoServiceImpl implements GrupoService {
 
 			grupo = grupoRepository.save(grupo);
 		} catch (Exception e) {
-			log.debug("Erro ao atualizar grupo: {}.", ObjectMapperUtil.writeValueAsString(grupo));
-			throw new ApiException(String.format("Erro ao atualizar grupo com o código: %s.", grupo.getCdGrupo()), e);
+			log.debug("Erro ao atualizar grupo: {}.", grupo);
+			throw new ApiException("Erro ao atualizar grupo com o código.", e);
 		}
 		return grupo;
 	}
@@ -89,8 +86,7 @@ public class GrupoServiceImpl implements GrupoService {
 
 			return new PageDTO<>(pageDTO.getNumber(), pageDTO.getSize(), total, grupos);
 		} catch (Exception e) {
-			log.debug("Erro ao buscar lista de grupos com os filtros: {} e paginação: {}.",
-					ObjectMapperUtil.writeValueAsString(grupoFilter), ObjectMapperUtil.writeValueAsString(pageDTO));
+			log.debug("Erro ao buscar lista de grupos com os filtros: {} e paginação: {}.", grupoFilter, pageDTO);
 			throw new ApiException("Erro ao buscar lista de grupos.", e);
 		}
 	}
@@ -99,9 +95,12 @@ public class GrupoServiceImpl implements GrupoService {
 	public Grupo buscar(Long cdGrupo) {
 		try {
 			return grupoRepository.findById(cdGrupo).orElseThrow(() -> new NaoEncontradoException("Grupo não encontrado."));
+		} catch (NaoEncontradoException e) {
+			log.debug("Grupo {} não encontrado.", cdGrupo);
+			throw e;
 		} catch (Exception e) {
 			log.debug("Erro ao buscar grupo com o código: {}.", cdGrupo);
-			throw new ApiException(String.format("Erro ao buscar grupo com o código: %s.", cdGrupo), e);
+			throw new ApiException("Erro ao buscar grupo com o código.", e);
 		}
 	}
 

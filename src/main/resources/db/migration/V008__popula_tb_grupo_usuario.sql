@@ -1,0 +1,9 @@
+-- INSERT
+INSERT INTO "OAUTH"."TB_GRUPO_USUARIO"(
+	"CD_GRUPO", 
+	"CD_USUARIO", 
+	"DT_CADASTRO", 
+	"CD_USUARIO_CRIACAO", 
+	"FL_ATIVO")
+VALUES (1, 1, now()::timestamp(0), 1, TRUE);
+

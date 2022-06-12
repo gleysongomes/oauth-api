@@ -13,6 +13,8 @@ public interface UsuarioService {
 
 	PageDTO<UsuarioMapping> listar(UsuarioFilter usuarioFilter, PageDTO<UsuarioMapping> pageDTO);
 
+	Usuario buscar(Long cdUsuario, String mensagem);
+
 	Usuario buscar(Long cdUsuario);
 
 	void validarAtualizacaoUsuario(Usuario usuario);

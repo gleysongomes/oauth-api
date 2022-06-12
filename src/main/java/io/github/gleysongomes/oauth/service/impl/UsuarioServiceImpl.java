@@ -19,7 +19,6 @@ import io.github.gleysongomes.oauth.exception.ValidacaoException;
 import io.github.gleysongomes.oauth.model.Usuario;
 import io.github.gleysongomes.oauth.repository.UsuarioRepository;
 import io.github.gleysongomes.oauth.service.UsuarioService;
-import io.github.gleysongomes.oauth.util.ObjectMapperUtil;
 
 @Service
 @Transactional(readOnly = true)
@@ -36,8 +35,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	@Transactional
 	public Usuario adicionar(Usuario usuario) {
-		Usuario usuarioCriacao = usuarioRepository.findById(1L)
-				.orElseThrow(() -> new NaoEncontradoException("Usuário de criação não encontrado."));
+		Usuario usuarioCriacao = buscar(1L, "Usuário de criação não encontrado.");
 
 		try {
 			usuario.setDtCadastro(new Date());
@@ -45,7 +43,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 			usuario = usuarioRepository.save(usuario);
 		} catch (Exception e) {
-			log.debug("Erro ao adicionar usuário: {}.", ObjectMapperUtil.writeValueAsString(usuario));
+			usuario.setHashSenha(null);
+			log.debug("Erro ao adicionar usuário: {}.", usuario);
 			throw new ApiException("Erro ao adicionar usuário.", e);
 		}
 		return usuario;
@@ -73,8 +72,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	@Transactional
 	public Usuario atualizar(Usuario usuario) {
-		Usuario usuarioAtualizacao = usuarioRepository.findById(1L)
-				.orElseThrow(() -> new NaoEncontradoException("Usuário de atualização não encontrado."));
+		Usuario usuarioAtualizacao = buscar(1L, "Usuário de atualização não encontrado.");
 
 		try {
 			usuario.setDtAtualizacao(new Date());
@@ -82,8 +80,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 			usuario = usuarioRepository.save(usuario);
 		} catch (Exception e) {
-			log.debug("Erro ao atualizar usuário: {}.", ObjectMapperUtil.writeValueAsString(usuario));
-			throw new ApiException(String.format("Erro ao atualizar usuário com o código: %s.", usuario.getCdUsuario()), e);
+			usuario.setHashSenha(null);
+			log.debug("Erro ao atualizar usuário: {}.", usuario);
+			throw new ApiException("Erro ao atualizar usuário com o código.", e);
 		}
 		return usuario;
 	}
@@ -116,21 +115,27 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 			return new PageDTO<>(pageDTO.getNumber(), pageDTO.getSize(), total, usuarios);
 		} catch (Exception e) {
-			log.debug("Erro ao buscar lista de usuários com os filtros: {} e paginação: {}.",
-					ObjectMapperUtil.writeValueAsString(usuarioFilter), ObjectMapperUtil.writeValueAsString(pageDTO));
+			log.debug("Erro ao buscar lista de usuários com os filtros: {} e paginação: {}.", usuarioFilter, pageDTO);
 			throw new ApiException("Erro ao buscar lista de usuários.", e);
 		}
 	}
 
 	@Override
-	public Usuario buscar(Long cdUsuario) {
+	public Usuario buscar(Long cdUsuario, String mensagem) {
 		try {
-			return usuarioRepository.findById(cdUsuario)
-					.orElseThrow(() -> new NaoEncontradoException("Usuário não encontrado."));
+			return usuarioRepository.findById(cdUsuario).orElseThrow(() -> new NaoEncontradoException(mensagem));
+		} catch (NaoEncontradoException e) {
+			log.debug("Usuário {} não encontrado.", cdUsuario);
+			throw e;
 		} catch (Exception e) {
 			log.debug("Erro ao buscar usuário com o código: {}.", cdUsuario);
-			throw new ApiException(String.format("Erro ao buscar usuário com o código: %s.", cdUsuario), e);
+			throw new ApiException("Erro ao buscar usuário com o código.", e);
 		}
+	}
+
+	@Override
+	public Usuario buscar(Long cdUsuario) {
+		return buscar(cdUsuario, "Usuário não encontrado.");
 	}
 
 	@Override
