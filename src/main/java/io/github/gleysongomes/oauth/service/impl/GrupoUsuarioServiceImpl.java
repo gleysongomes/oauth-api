@@ -44,7 +44,7 @@ public class GrupoUsuarioServiceImpl implements GrupoUsuarioService {
 	public GrupoUsuario adicionar(GrupoUsuario grupoUsuario) {
 		validarAssociacaoGrupoUsuario(grupoUsuario);
 
-		grupoService.buscar(grupoUsuario.getCdUsuario());
+		grupoService.buscar(grupoUsuario.getCdGrupo());
 		usuarioService.buscar(grupoUsuario.getCdUsuario());
 		Usuario usuarioCriacao = usuarioService.buscar(1L, "Usuário de criação não encontrado.");
 
@@ -84,7 +84,7 @@ public class GrupoUsuarioServiceImpl implements GrupoUsuarioService {
 	public GrupoUsuario atualizar(GrupoUsuario grupoUsuario) {
 		validarAssociacaoGrupoUsuario(grupoUsuario);
 
-		grupoService.buscar(grupoUsuario.getCdUsuario());
+		grupoService.buscar(grupoUsuario.getCdGrupo());
 		usuarioService.buscar(grupoUsuario.getCdUsuario());
 		Usuario usuarioAtualizacao = usuarioService.buscar(1L, "Usuário de atualização não encontrado.");
 
