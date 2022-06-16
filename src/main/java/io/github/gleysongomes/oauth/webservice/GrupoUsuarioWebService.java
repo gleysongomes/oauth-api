@@ -36,20 +36,20 @@ public class GrupoUsuarioWebService {
 
 	@GetMapping("/grupos/{cdUsuario}")
 	public List<GrupoUsuarioDTO> findByCdUsuarioAndFlAtivoIsTrue(@PathVariable Long cdUsuario) {
-		List<GrupoUsuario> grupos = grupoUsuarioService.findByCdUsuarioAndFlAtivoIsTrue(cdUsuario);
+		List<GrupoUsuario> gruposUsuarios = grupoUsuarioService.findByCdUsuarioAndFlAtivoIsTrue(cdUsuario);
 
-		List<GrupoUsuarioDTO> gruposDTOs = grupoUsuarioMapper.toDtos(grupos);
+		List<GrupoUsuarioDTO> gruposUsuariosDTOs = grupoUsuarioMapper.toDtos(gruposUsuarios);
 
-		return gruposDTOs;
+		return gruposUsuariosDTOs;
 	}
 
 	@GetMapping("/usuarios/{cdGrupo}")
 	public List<GrupoUsuarioDTO> findByCdGrupoAndFlAtivoIsTrue(@PathVariable Long cdGrupo) {
-		List<GrupoUsuario> usuarios = grupoUsuarioService.findByCdGrupoAndFlAtivoIsTrue(cdGrupo);
+		List<GrupoUsuario> gruposUsuarios = grupoUsuarioService.findByCdGrupoAndFlAtivoIsTrue(cdGrupo);
 
-		List<GrupoUsuarioDTO> gruposDTOs = grupoUsuarioMapper.toDtos(usuarios);
+		List<GrupoUsuarioDTO> gruposUsuariosDTOs = grupoUsuarioMapper.toDtos(gruposUsuarios);
 
-		return gruposDTOs;
+		return gruposUsuariosDTOs;
 	}
 
 	@PostMapping
@@ -76,6 +76,8 @@ public class GrupoUsuarioWebService {
 	@PutMapping("/{cdGrupo}/{cdUsuario}")
 	public GrupoUsuarioDTO atualizar(@PathVariable Long cdGrupo, @PathVariable Long cdUsuario,
 			@RequestBody @Valid GrupoUsuarioInput grupoUsuarioInput) {
+		grupoUsuarioService.validarAtualizacao(cdGrupo, cdUsuario, grupoUsuarioInput);
+
 		GrupoUsuario grupoUsuario = grupoUsuarioService.buscar(cdGrupo, cdUsuario);
 
 		grupoUsuarioMapper.copyToDomainObject(grupoUsuarioInput, grupoUsuario);

@@ -2,6 +2,7 @@ package io.github.gleysongomes.oauth.service;
 
 import java.util.List;
 
+import io.github.gleysongomes.oauth.dto.input.GrupoUsuarioInput;
 import io.github.gleysongomes.oauth.model.GrupoUsuario;
 
 public interface GrupoUsuarioService {
@@ -15,4 +16,6 @@ public interface GrupoUsuarioService {
 	List<GrupoUsuario> findByCdGrupoAndFlAtivoIsTrue(Long cdGrupo);
 
 	List<GrupoUsuario> findByCdUsuarioAndFlAtivoIsTrue(Long cdUsuario);
+
+	void validarAtualizacao(Long cdGrupo, Long cdUsuario, GrupoUsuarioInput grupoUsuarioInput);
 }

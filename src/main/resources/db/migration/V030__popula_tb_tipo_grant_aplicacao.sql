@@ -1,0 +1,43 @@
+-- INSERT
+INSERT INTO "OAUTH"."TB_TIPO_GRANT_APLICACAO"(
+	"CD_TIPO_GRANT", 
+	"CD_APLICACAO", 
+	"DT_CADASTRO", 
+	"CD_USUARIO_CRIACAO", 
+	"FL_ATIVO")
+VALUES (
+	1, 
+	1, 
+	now()::timestamp(0), 
+	1, 
+	TRUE
+);
+
+INSERT INTO "OAUTH"."TB_TIPO_GRANT_APLICACAO"(
+	"CD_TIPO_GRANT", 
+	"CD_APLICACAO", 
+	"DT_CADASTRO", 
+	"CD_USUARIO_CRIACAO", 
+	"FL_ATIVO")
+VALUES (
+	2, 
+	1, 
+	now()::timestamp(0), 
+	1, 
+	TRUE
+);
+
+INSERT INTO "OAUTH"."TB_TIPO_GRANT_APLICACAO"(
+	"CD_TIPO_GRANT", 
+	"CD_APLICACAO", 
+	"DT_CADASTRO", 
+	"CD_USUARIO_CRIACAO", 
+	"FL_ATIVO")
+VALUES (
+	3, 
+	1, 
+	now()::timestamp(0), 
+	1, 
+	TRUE
+);
+

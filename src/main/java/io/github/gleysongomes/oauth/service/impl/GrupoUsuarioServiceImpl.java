@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.github.gleysongomes.oauth.dto.input.GrupoUsuarioInput;
 import io.github.gleysongomes.oauth.exception.ApiException;
 import io.github.gleysongomes.oauth.exception.NaoEncontradoException;
 import io.github.gleysongomes.oauth.exception.ValidacaoException;
@@ -149,6 +150,18 @@ public class GrupoUsuarioServiceImpl implements GrupoUsuarioService {
 
 		if (grupoUsuario.getFlAtivo() == null) {
 			throw new ValidacaoException("Informar se associação de grupo com usuário está ativa.");
+		}
+	}
+
+	@Override
+	public void validarAtualizacao(Long cdGrupo, Long cdUsuario, GrupoUsuarioInput grupoUsuarioInput) {
+		if (!grupoUsuarioInput.getCdGrupo().equals(cdGrupo)) {
+			throw new ValidacaoException(
+					"O valor do código do grupo enviado na url deve ser igual ao enviado no corpo da requisição.");
+		}
+		if (!grupoUsuarioInput.getCdUsuario().equals(cdUsuario)) {
+			throw new ValidacaoException(
+					"O valor do código do usuário enviado na url deve ser igual ao enviado no corpo da requisição.");
 		}
 	}
 
