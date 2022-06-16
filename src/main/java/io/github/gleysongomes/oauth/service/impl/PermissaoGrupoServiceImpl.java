@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -160,7 +158,7 @@ public class PermissaoGrupoServiceImpl implements PermissaoGrupoService {
 	}
 
 	@Override
-	public void validarAtualizacao(Long cdPermissao, Long cdGrupo, @Valid PermissaoGrupoInput permissaoGrupoInput) {
+	public void validarAtualizacao(Long cdPermissao, Long cdGrupo, PermissaoGrupoInput permissaoGrupoInput) {
 		if (!permissaoGrupoInput.getCdPermissao().equals(cdPermissao)) {
 			throw new ValidacaoException(
 					"O valor do código da permissão enviado na url deve ser igual ao enviado no corpo da requisição.");
