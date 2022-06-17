@@ -1,0 +1,21 @@
+-- INSERT
+INSERT INTO "OAUTH"."TB_ESCOPO"(
+	"CD_ESCOPO", 
+	"NOME", 
+	"DESCRICAO", 
+	"DT_CADASTRO", 
+	"CD_APLICACAO", 
+	"CD_USUARIO_CRIACAO", 
+	"FL_ATIVO")
+VALUES (1, 'OAUTH_CLI_LEITURA', 'Escopo de leitura.', now()::timestamp(0), 1, 1, TRUE);
+
+INSERT INTO "OAUTH"."TB_ESCOPO"(
+	"CD_ESCOPO", 
+	"NOME", 
+	"DESCRICAO", 
+	"DT_CADASTRO", 
+	"CD_APLICACAO", 
+	"CD_USUARIO_CRIACAO", 
+	"FL_ATIVO")
+VALUES (2, 'OAUTH_CLI_ESCRITA', 'Escopo de escrita.', now()::timestamp(0), 1, 1, TRUE);
+

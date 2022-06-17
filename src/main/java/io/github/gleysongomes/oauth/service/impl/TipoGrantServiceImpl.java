@@ -128,7 +128,7 @@ public class TipoGrantServiceImpl implements TipoGrantService {
 			return tipoGrantRepository.findById(cdTipoGrant)
 					.orElseThrow(() -> new NaoEncontradoException("Tipo grant não encontrado."));
 		} catch (NaoEncontradoException e) {
-			log.debug("Tipo grant {} não encontrada.", cdTipoGrant);
+			log.debug("Tipo grant {} não encontrado.", cdTipoGrant);
 			throw e;
 		} catch (Exception e) {
 			log.debug("Erro ao buscar tipo grant com o código: {}.", cdTipoGrant);
