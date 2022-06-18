@@ -1,19 +1,24 @@
 package io.github.gleysongomes.oauth.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import io.github.gleysongomes.oauth.model.resumo.TipoGrantAplicacaoResumo;
 import io.github.gleysongomes.oauth.model.resumo.UsuarioResumo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -78,4 +83,19 @@ public class Aplicacao {
 	@ManyToOne
 	@JoinColumn(name = "CD_USUARIO_ATUALIZACAO", insertable = false, updatable = false)
 	private UsuarioResumo usuarioAtualizacao;
+
+	@OneToMany(mappedBy = "cdAplicacao", fetch = FetchType.EAGER)
+	private Set<TipoGrantAplicacaoResumo> tiposGrant = new HashSet<>();
+
+	@OneToMany(mappedBy = "cdAplicacao", fetch = FetchType.EAGER)
+	private Set<Escopo> escopos = new HashSet<>();
+
+	@OneToMany(mappedBy = "cdAplicacao", fetch = FetchType.EAGER)
+	private Set<Recurso> recursos = new HashSet<>();
+
+	@OneToMany(mappedBy = "cdAplicacao", fetch = FetchType.EAGER)
+	private Set<Autoridade> autoridades = new HashSet<>();
+
+	@OneToMany(mappedBy = "cdAplicacao", fetch = FetchType.EAGER)
+	private Set<Redirecionamento> redirecionamentos = new HashSet<>();
 }

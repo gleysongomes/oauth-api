@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import io.github.gleysongomes.oauth.dto.PageDTO;
 import io.github.gleysongomes.oauth.dto.input.filter.PermissaoFilter;
 import io.github.gleysongomes.oauth.dto.mapping.PermissaoMapping;
-import io.github.gleysongomes.oauth.dto.mapping.PermissaoMappingResumo;
+import io.github.gleysongomes.oauth.dto.mapping.PermissaoResumoMapping;
 import io.github.gleysongomes.oauth.repository.PermissaoRepositoryCustom;
 import io.github.gleysongomes.oauth.util.DatasUtil;
 
@@ -117,7 +117,7 @@ public class PermissaoRepositoryImpl implements PermissaoRepositoryCustom {
 	}
 
 	@Override
-	public List<PermissaoMappingResumo> findPermissoesGrupoByCdUsuario(Long cdUsuario) {
+	public List<PermissaoResumoMapping> findPermissoesGrupoByCdUsuario(Long cdUsuario) {
 		try {
 			// @formatter:off
 			String sql = "SELECT P.\"CD_PERMISSAO\", " + 
@@ -139,7 +139,7 @@ public class PermissaoRepositoryImpl implements PermissaoRepositoryCustom {
 					"ORDER BY P.CD_PERMISSAO ";
 			// @formatter:on
 
-			TypedQuery<PermissaoMappingResumo> query = entityManager.createQuery(sql, PermissaoMappingResumo.class)
+			TypedQuery<PermissaoResumoMapping> query = entityManager.createQuery(sql, PermissaoResumoMapping.class)
 					.setParameter("cdUsuario", cdUsuario);
 
 			return query.getResultList();

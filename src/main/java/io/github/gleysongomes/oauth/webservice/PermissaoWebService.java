@@ -36,7 +36,7 @@ public class PermissaoWebService {
 	}
 
 	@GetMapping
-	public PageDTO<PermissaoMapping> listar(PermissaoFilter permissaoFilter, PageDTO<PermissaoMapping> pageDTO) {
+	public PageDTO<PermissaoMapping> listar(PermissaoFilter permissaoFilter, @Valid PageDTO<PermissaoMapping> pageDTO) {
 		PageDTO<PermissaoMapping> permissoes = permissaoService.listar(permissaoFilter, pageDTO);
 
 		return permissoes;

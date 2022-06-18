@@ -70,10 +70,10 @@ public class AutoridadeServiceImpl implements AutoridadeService {
 			throw new ValidacaoException("Informar autoridade.");
 		}
 		if (StringUtils.isBlank(autoridade.getNome())) {
-			throw new ValidacaoException("Informar nome do autoridade.");
+			throw new ValidacaoException("Informar nome da autoridade.");
 		}
 		if (StringUtils.isBlank(autoridade.getDescricao())) {
-			throw new ValidacaoException("Informar descrição do autoridade.");
+			throw new ValidacaoException("Informar descrição da autoridade.");
 		}
 		if (autoridade.getCdAplicacao() == null) {
 			throw new ValidacaoException("Informar código da aplicação.");
@@ -124,11 +124,11 @@ public class AutoridadeServiceImpl implements AutoridadeService {
 	@Override
 	public PageDTO<AutoridadeMapping> listar(AutoridadeFilter autoridadeFilter, PageDTO<AutoridadeMapping> pageDTO) {
 		try {
-			List<AutoridadeMapping> permissoes = autoridadeRepository.listar(autoridadeFilter, pageDTO);
+			List<AutoridadeMapping> autoridades = autoridadeRepository.listar(autoridadeFilter, pageDTO);
 
 			Long total = autoridadeRepository.contar(autoridadeFilter);
 
-			return new PageDTO<>(pageDTO.getNumber(), pageDTO.getSize(), total, permissoes);
+			return new PageDTO<>(pageDTO.getNumber(), pageDTO.getSize(), total, autoridades);
 		} catch (Exception e) {
 			log.debug("Erro ao buscar lista de autoridades com os filtros: {} e paginação: {}.", autoridadeFilter, pageDTO);
 			throw new ApiException("Erro ao buscar lista de autoridades.", e);

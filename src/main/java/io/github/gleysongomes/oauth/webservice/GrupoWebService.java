@@ -36,7 +36,7 @@ public class GrupoWebService {
 	}
 
 	@GetMapping
-	public PageDTO<GrupoMapping> listar(GrupoFilter grupoFilter, PageDTO<GrupoMapping> pageDTO) {
+	public PageDTO<GrupoMapping> listar(GrupoFilter grupoFilter, @Valid PageDTO<GrupoMapping> pageDTO) {
 		PageDTO<GrupoMapping> grupos = grupoService.listar(grupoFilter, pageDTO);
 
 		return grupos;

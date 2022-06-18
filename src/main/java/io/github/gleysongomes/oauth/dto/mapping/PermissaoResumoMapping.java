@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "TB_PERMISSAO", schema = "OAUTH")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class PermissaoMappingResumo {
+public class PermissaoResumoMapping {
 
 	@Id
 	@EqualsAndHashCode.Include

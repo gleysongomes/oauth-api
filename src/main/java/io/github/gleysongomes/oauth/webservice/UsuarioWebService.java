@@ -37,7 +37,7 @@ public class UsuarioWebService {
 	}
 
 	@GetMapping
-	public PageDTO<UsuarioMapping> listar(UsuarioFilter usuarioFilter, PageDTO<UsuarioMapping> pageDTO) {
+	public PageDTO<UsuarioMapping> listar(UsuarioFilter usuarioFilter, @Valid PageDTO<UsuarioMapping> pageDTO) {
 		PageDTO<UsuarioMapping> usuarios = usuarioService.listar(usuarioFilter, pageDTO);
 
 		return usuarios;
