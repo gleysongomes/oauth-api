@@ -26,4 +26,8 @@ public interface UsuarioService {
 	void validarSenhaAtual(String senhaAtual, String hashSenha);
 
 	void validarConfirmacaoSenha(String senha, String senhaConfirmada);
+
+	boolean isOwner(Long cdUsuario);
+
+	Usuario buscarPorLogin(String login);
 }

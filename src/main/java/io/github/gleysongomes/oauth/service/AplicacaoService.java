@@ -14,4 +14,6 @@ public interface AplicacaoService {
 	PageDTO<AplicacaoMapping> listar(AplicacaoFilter aplicacaoFilter, PageDTO<AplicacaoMapping> pageDTO);
 
 	Aplicacao buscar(Long cdAplicacao);
+
+	Aplicacao buscarPorNome(String nome);
 }

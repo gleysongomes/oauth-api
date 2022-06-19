@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -33,8 +33,11 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	private static final String ERRO_INTERNO_SISTEMA = "Ocorreu um erro interno no sistema.";
 
-	@Autowired
-	private MessageSource messageSource;
+	private final MessageSource messageSource;
+
+	public ApiExceptionHandler(MessageSource messageSource) {
+		this.messageSource = messageSource;
+	}
 
 	@Override
 	protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatus status,
@@ -125,10 +128,20 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	@ExceptionHandler(DataIntegrityViolationException.class)
-	public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex,
-			WebRequest request) {
+	public ResponseEntity<Object> handleDataIntegrityViolation(DataIntegrityViolationException ex, WebRequest request) {
 		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 		ProblemType problemType = ProblemType.ERRO_DE_INTEGRIDADE;
+
+		Problem problem = createProblemBuilder(status, problemType).userMessage(problemType.getTitle())
+				.rootCause(ExceptionUtils.getRootCauseMessage(ex)).build();
+
+		return ResponseEntity.status(status).body(problem);
+	}
+
+	@ExceptionHandler(AccessDeniedException.class)
+	public ResponseEntity<Object> handleAccessDenied(AccessDeniedException ex, WebRequest request) {
+		HttpStatus status = HttpStatus.FORBIDDEN;
+		ProblemType problemType = ProblemType.ACESSO_NEGADO;
 
 		Problem problem = createProblemBuilder(status, problemType).userMessage(problemType.getTitle())
 				.rootCause(ExceptionUtils.getRootCauseMessage(ex)).build();

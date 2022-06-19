@@ -3,6 +3,7 @@ package io.github.gleysongomes.oauth.mapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import io.github.gleysongomes.oauth.dto.input.AdicaoUsuarioInput;
 import io.github.gleysongomes.oauth.dto.input.AtualizacaoUsuarioInput;
@@ -14,10 +15,13 @@ public abstract class UsuarioMapperDecorator implements UsuarioMapper {
 	@Qualifier("delegate")
 	private UsuarioMapper delegate;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@Override
 	public Usuario toDomainObject(AdicaoUsuarioInput adicaoUsuarioInput) {
 		Usuario usuario = delegate.toDomainObject(adicaoUsuarioInput);
-		usuario.setHashSenha(adicaoUsuarioInput.getSenha());
+		usuario.setHashSenha(passwordEncoder.encode(adicaoUsuarioInput.getSenha()));
 		return usuario;
 	}
 
@@ -27,7 +31,7 @@ public abstract class UsuarioMapperDecorator implements UsuarioMapper {
 		if (StringUtils.isNotBlank(atualizacaoUsuarioInput.getSenhaAtual())
 				&& StringUtils.isNotBlank(atualizacaoUsuarioInput.getNovaSenha())
 				&& StringUtils.isNotBlank(atualizacaoUsuarioInput.getNovaSenhaConfirmada())) {
-			usuario.setHashSenha(atualizacaoUsuarioInput.getNovaSenha());
+			usuario.setHashSenha(passwordEncoder.encode(atualizacaoUsuarioInput.getNovaSenha()));
 		}
 	}
 

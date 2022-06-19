@@ -10,6 +10,7 @@ public enum ProblemType {
 	NAO_ENCONTRADO("Recurso não encontrado"),
 	ERRO_NEGOCIO("Erro de negócio"),
 	ERRO_DE_INTEGRIDADE("Erro de integridade dos dados"),
+	ACESSO_NEGADO("Acesso negado"),
 	ERRO_DE_SISTEMA("Erro de sistema");
 	// @formatter:on
 

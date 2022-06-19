@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ import io.github.gleysongomes.oauth.exception.NaoEncontradoException;
 import io.github.gleysongomes.oauth.exception.ValidacaoException;
 import io.github.gleysongomes.oauth.model.Usuario;
 import io.github.gleysongomes.oauth.repository.UsuarioRepository;
+import io.github.gleysongomes.oauth.security.ApiSecurity;
 import io.github.gleysongomes.oauth.service.UsuarioService;
 
 @Service
@@ -28,8 +30,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	private final UsuarioRepository usuarioRepository;
 
-	public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+	private final ApiSecurity apiSecurity;
+
+	private final PasswordEncoder passwordEncoder;
+
+	public UsuarioServiceImpl(UsuarioRepository usuarioRepository, ApiSecurity apiSecurity,
+			PasswordEncoder passwordEncoder) {
 		this.usuarioRepository = usuarioRepository;
+		this.apiSecurity = apiSecurity;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
@@ -160,7 +169,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public void validarSenhaAtual(String senhaAtual, String hashSenha) {
 		if (StringUtils.isNotBlank(senhaAtual) && StringUtils.isNotBlank(hashSenha)) {
-			if (!senhaAtual.equals(hashSenha)) {
+			if (!passwordEncoder.matches(senhaAtual, hashSenha)) {
 				throw new ValidacaoException("A senha atual está incorreta.");
 			}
 		}
@@ -170,6 +179,30 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public void validarConfirmacaoSenha(String senha, String senhaConfirmada) {
 		if (!senha.equals(senhaConfirmada)) {
 			throw new ValidacaoException("A senha é diferente da senha confirmada.");
+		}
+	}
+
+	@Override
+	public boolean isOwner(Long cdUsuario) {
+		Usuario usuario = buscar(cdUsuario);
+		Usuario usuarioLogado = buscarPorLogin(apiSecurity.getLoginUsuarioLogado());
+		if (usuario.getCdUsuarioCriacao() != null && usuario.getCdUsuarioCriacao().equals(usuarioLogado.getCdUsuario())) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Usuario buscarPorLogin(String login) {
+		try {
+			return usuarioRepository.findByLogin(login)
+					.orElseThrow(() -> new NaoEncontradoException("Usuário não encontrado."));
+		} catch (NaoEncontradoException e) {
+			log.debug("Usuário não encontrado pelo login: {}.", login);
+			throw e;
+		} catch (Exception e) {
+			log.debug("Erro ao buscar usuário pelo login: {}.", login);
+			throw new ApiException("Erro ao buscar usuário pelo login.", e);
 		}
 	}
 

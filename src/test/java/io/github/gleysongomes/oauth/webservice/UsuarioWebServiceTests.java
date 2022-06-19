@@ -5,7 +5,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -23,15 +22,19 @@ import io.github.gleysongomes.oauth.util.ObjectMapperUtil;
 @SpringBootTest(classes = OauthApiApplication.class)
 public class UsuarioWebServiceTests {
 
-	@Autowired
-	private MockMvc usuarioMockMvc;
+	private final MockMvc usuarioMockMvc;
 
-	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private final UsuarioRepository usuarioRepository;
+
+	public UsuarioWebServiceTests(MockMvc usuarioMockMvc, UsuarioRepository usuarioRepository) {
+		this.usuarioMockMvc = usuarioMockMvc;
+		this.usuarioRepository = usuarioRepository;
+	}
 
 	@Test
 	@Transactional
 	public void adicionar() throws Exception {
+		// @formatter:off
 		AdicaoUsuarioInput adicaoUsuarioInput = AdicaoUsuarioInput.builder()
 				.login("teste")
 				.email("teste@localhost")
@@ -44,6 +47,7 @@ public class UsuarioWebServiceTests {
 				post("/usuarios").contentType(MediaType.APPLICATION_JSON)
 						.content(ObjectMapperUtil.writeValueAsString(adicaoUsuarioInput)))
 				.andExpect(status().isCreated());
+		// @formatter:on
 
 		Usuario usuario = usuarioRepository.findByLogin("teste")
 				.orElseThrow(() -> new NaoEncontradoException("Usuário não encontrado."));

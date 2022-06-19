@@ -22,6 +22,7 @@ import io.github.gleysongomes.oauth.dto.mapping.UsuarioMapping;
 import io.github.gleysongomes.oauth.mapper.UsuarioMapper;
 import io.github.gleysongomes.oauth.model.Usuario;
 import io.github.gleysongomes.oauth.service.UsuarioService;
+import io.github.gleysongomes.oauth.webservice.authorize.UsuarioAuthorize;
 
 @RestController
 @RequestMapping(path = "/usuarios", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -37,6 +38,7 @@ public class UsuarioWebService {
 	}
 
 	@GetMapping
+	@UsuarioAuthorize.Listar
 	public PageDTO<UsuarioMapping> listar(UsuarioFilter usuarioFilter, @Valid PageDTO<UsuarioMapping> pageDTO) {
 		PageDTO<UsuarioMapping> usuarios = usuarioService.listar(usuarioFilter, pageDTO);
 
@@ -45,6 +47,7 @@ public class UsuarioWebService {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@UsuarioAuthorize.Adicionar
 	public UsuarioDTO adicionar(@RequestBody @Valid AdicaoUsuarioInput adicaoUsuarioInput) {
 		usuarioService.validarConfirmacaoSenha(adicaoUsuarioInput.getSenha(), adicaoUsuarioInput.getSenhaConfirmada());
 
@@ -60,6 +63,7 @@ public class UsuarioWebService {
 	}
 
 	@GetMapping("/{cdUsuario}")
+	@UsuarioAuthorize.Buscar
 	public UsuarioDTO buscar(@PathVariable Long cdUsuario) {
 		Usuario usuario = usuarioService.buscar(cdUsuario);
 
@@ -69,6 +73,7 @@ public class UsuarioWebService {
 	}
 
 	@PutMapping("/{cdUsuario}")
+	@UsuarioAuthorize.Atualizar
 	public UsuarioDTO atualizar(@PathVariable Long cdUsuario,
 			@RequestBody @Valid AtualizacaoUsuarioInput atualizacaoUsuarioInput) {
 		usuarioService.validarAtualizacaoSenha(atualizacaoUsuarioInput.getSenhaAtual(),

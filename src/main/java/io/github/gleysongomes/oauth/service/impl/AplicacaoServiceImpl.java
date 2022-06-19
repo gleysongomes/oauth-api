@@ -105,4 +105,18 @@ public class AplicacaoServiceImpl implements AplicacaoService {
 		}
 	}
 
+	@Override
+	public Aplicacao buscarPorNome(String nome) {
+		try {
+			return aplicacaoRepository.findByNome(nome)
+					.orElseThrow(() -> new NaoEncontradoException("Aplicação não encontrada."));
+		} catch (NaoEncontradoException e) {
+			log.debug("Aplicação {} não encontrada.", nome);
+			throw e;
+		} catch (Exception e) {
+			log.debug("Erro ao buscar aplicação pelo nome: {}.", nome);
+			throw new ApiException("Erro ao buscar aplicação.", e);
+		}
+	}
+
 }
