@@ -13,5 +13,5 @@ public interface PermissaoRepositoryCustom {
 
 	Long contar(PermissaoFilter permissaoFilter);
 
-	List<PermissaoResumoMapping> findPermissoesGrupoByCdUsuario(Long cdUsuario);
+	List<PermissaoResumoMapping> findPermissoesGrupoByCdUsuarioAndNomesApis(Long cdUsuario, String nomesApis);
 }

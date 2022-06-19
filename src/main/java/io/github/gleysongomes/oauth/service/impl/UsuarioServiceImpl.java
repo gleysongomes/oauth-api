@@ -44,7 +44,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	@Transactional
 	public Usuario adicionar(Usuario usuario) {
-		Usuario usuarioCriacao = buscar(1L, "Usuário de criação não encontrado.");
+		Usuario usuarioCriacao = buscarPorLogin(apiSecurity.getLoginUsuarioLogado(), "Usuário de criação não encontrado.");
 
 		try {
 			usuario.setDtCadastro(new Date());
@@ -81,7 +81,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	@Transactional
 	public Usuario atualizar(Usuario usuario) {
-		Usuario usuarioAtualizacao = buscar(1L, "Usuário de atualização não encontrado.");
+		Usuario usuarioAtualizacao = buscarPorLogin(apiSecurity.getLoginUsuarioLogado(),
+				"Usuário de atualização não encontrado.");
 
 		try {
 			usuario.setDtAtualizacao(new Date());
@@ -193,10 +194,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public Usuario buscarPorLogin(String login) {
+	public Usuario buscarPorLogin(String login, String mensagem) {
 		try {
-			return usuarioRepository.findByLogin(login)
-					.orElseThrow(() -> new NaoEncontradoException("Usuário não encontrado."));
+			return usuarioRepository.findByLogin(login).orElseThrow(() -> new NaoEncontradoException(mensagem));
 		} catch (NaoEncontradoException e) {
 			log.debug("Usuário não encontrado pelo login: {}.", login);
 			throw e;
@@ -204,6 +204,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 			log.debug("Erro ao buscar usuário pelo login: {}.", login);
 			throw new ApiException("Erro ao buscar usuário pelo login.", e);
 		}
+	}
+
+	@Override
+	public Usuario buscarPorLogin(String login) {
+		return buscarPorLogin(login, "Usuário não encontrado.");
 	}
 
 }

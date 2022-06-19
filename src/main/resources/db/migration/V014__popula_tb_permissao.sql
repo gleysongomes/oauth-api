@@ -1,4 +1,4 @@
--- INSERT
+-- INSERT - USUÁRIO
 INSERT INTO "OAUTH"."TB_PERMISSAO"(
 	"CD_PERMISSAO", 
 	"NOME", 
@@ -7,7 +7,7 @@ INSERT INTO "OAUTH"."TB_PERMISSAO"(
 	"CD_APLICACAO", 
 	"CD_USUARIO_CRIACAO", 
 	"FL_ATIVA")
-VALUES (1, 'ADICIONAR_PERMISSAO', 'Permite adição de permissão.', now()::timestamp(0), 1, 1, TRUE);
+VALUES (1, 'LISTAR_USUARIO', 'Permite listar usuários.', now()::timestamp(0), 2, 1, TRUE);
 
 INSERT INTO "OAUTH"."TB_PERMISSAO"(
 	"CD_PERMISSAO", 
@@ -17,7 +17,7 @@ INSERT INTO "OAUTH"."TB_PERMISSAO"(
 	"CD_APLICACAO", 
 	"CD_USUARIO_CRIACAO", 
 	"FL_ATIVA")
-VALUES (2, 'ATUALIZAR_PERMISSAO', 'Permite atualização de permissão.', now()::timestamp(0), 2, 1, TRUE);
+VALUES (2, 'BUSCAR_USUARIO', 'Permite buscar usuário.', now()::timestamp(0), 2, 1, TRUE);
 
 INSERT INTO "OAUTH"."TB_PERMISSAO"(
 	"CD_PERMISSAO", 
@@ -27,7 +27,7 @@ INSERT INTO "OAUTH"."TB_PERMISSAO"(
 	"CD_APLICACAO", 
 	"CD_USUARIO_CRIACAO", 
 	"FL_ATIVA")
-VALUES (3, 'EXCLUIR_PERMISSAO', 'Permite exclusão de permissão.', now()::timestamp(0), 2, 1, TRUE);
+VALUES (3, 'ADICIONAR_USUARIO', 'Permite adicionar usuário.', now()::timestamp(0), 2, 1, TRUE);
 
 INSERT INTO "OAUTH"."TB_PERMISSAO"(
 	"CD_PERMISSAO", 
@@ -37,5 +37,66 @@ INSERT INTO "OAUTH"."TB_PERMISSAO"(
 	"CD_APLICACAO", 
 	"CD_USUARIO_CRIACAO", 
 	"FL_ATIVA")
-VALUES (4, 'VISUALIZAR_PERMISSAO', 'Permite visualização de permissão.', now()::timestamp(0), 1, 1, TRUE);
+VALUES (4, 'ATUALIZAR_USUARIO', 'Permite atualizar usuário.', now()::timestamp(0), 2, 1, TRUE);
+
+INSERT INTO "OAUTH"."TB_PERMISSAO"(
+	"CD_PERMISSAO", 
+	"NOME", 
+	"DESCRICAO", 
+	"DT_CADASTRO", 
+	"CD_APLICACAO", 
+	"CD_USUARIO_CRIACAO", 
+	"FL_ATIVA")
+VALUES (5, 'EXCLUIR_USUARIO', 'Permite excluir usuário.', now()::timestamp(0), 2, 1, TRUE);
+
+-- INSERT - GRUPO
+INSERT INTO "OAUTH"."TB_PERMISSAO"(
+	"CD_PERMISSAO", 
+	"NOME", 
+	"DESCRICAO", 
+	"DT_CADASTRO", 
+	"CD_APLICACAO", 
+	"CD_USUARIO_CRIACAO", 
+	"FL_ATIVA")
+VALUES (6, 'LISTAR_GRUPO', 'Permite listar grupos.', now()::timestamp(0), 2, 1, TRUE);
+
+INSERT INTO "OAUTH"."TB_PERMISSAO"(
+	"CD_PERMISSAO", 
+	"NOME", 
+	"DESCRICAO", 
+	"DT_CADASTRO", 
+	"CD_APLICACAO", 
+	"CD_USUARIO_CRIACAO", 
+	"FL_ATIVA")
+VALUES (7, 'BUSCAR_GRUPO', 'Permite buscar grupo.', now()::timestamp(0), 2, 1, TRUE);
+
+INSERT INTO "OAUTH"."TB_PERMISSAO"(
+	"CD_PERMISSAO", 
+	"NOME", 
+	"DESCRICAO", 
+	"DT_CADASTRO", 
+	"CD_APLICACAO", 
+	"CD_USUARIO_CRIACAO", 
+	"FL_ATIVA")
+VALUES (8, 'ADICIONAR_GRUPO', 'Permite adicionar grupo.', now()::timestamp(0), 2, 1, TRUE);
+
+INSERT INTO "OAUTH"."TB_PERMISSAO"(
+	"CD_PERMISSAO", 
+	"NOME", 
+	"DESCRICAO", 
+	"DT_CADASTRO", 
+	"CD_APLICACAO", 
+	"CD_USUARIO_CRIACAO", 
+	"FL_ATIVA")
+VALUES (9, 'ATUALIZAR_GRUPO', 'Permite atualizar grupo.', now()::timestamp(0), 2, 1, TRUE);
+
+INSERT INTO "OAUTH"."TB_PERMISSAO"(
+	"CD_PERMISSAO", 
+	"NOME", 
+	"DESCRICAO", 
+	"DT_CADASTRO", 
+	"CD_APLICACAO", 
+	"CD_USUARIO_CRIACAO", 
+	"FL_ATIVA")
+VALUES (10, 'EXCLUIR_GRUPO', 'Permite excluir grupo.', now()::timestamp(0), 2, 1, TRUE);
 

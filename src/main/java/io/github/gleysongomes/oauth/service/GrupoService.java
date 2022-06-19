@@ -14,4 +14,6 @@ public interface GrupoService {
 	PageDTO<GrupoMapping> listar(GrupoFilter grupoFilter, PageDTO<GrupoMapping> pageDTO);
 
 	Grupo buscar(Long cdGrupo);
+
+	boolean isOwner(Long cdGrupo);
 }

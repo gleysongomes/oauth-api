@@ -2,7 +2,9 @@ package io.github.gleysongomes.oauth.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import io.github.gleysongomes.oauth.exception.ValidacaoException;
 import io.github.gleysongomes.oauth.model.Grupo;
 import io.github.gleysongomes.oauth.model.Usuario;
 import io.github.gleysongomes.oauth.repository.GrupoRepository;
+import io.github.gleysongomes.oauth.security.ApiSecurity;
 import io.github.gleysongomes.oauth.service.GrupoService;
 import io.github.gleysongomes.oauth.service.UsuarioService;
 
@@ -30,19 +33,23 @@ public class GrupoServiceImpl implements GrupoService {
 
 	private final UsuarioService usuarioService;
 
-	public GrupoServiceImpl(GrupoRepository grupoRepository, UsuarioService usuarioService) {
+	private final ApiSecurity apiSecurity;
+
+	public GrupoServiceImpl(GrupoRepository grupoRepository, UsuarioService usuarioService, ApiSecurity apiSecurity) {
 		this.grupoRepository = grupoRepository;
 		this.usuarioService = usuarioService;
+		this.apiSecurity = apiSecurity;
 	}
 
 	@Override
 	@Transactional
 	public Grupo adicionar(Grupo grupo) {
-		if (grupo == null) {
-			throw new ValidacaoException("Informe um grupo.");
-		}
+		validarGrupo(grupo);
 
-		Usuario usuarioCriacao = usuarioService.buscar(1L, "Usuário de criação não encontrado.");
+		Usuario usuarioCriacao = usuarioService.buscarPorLogin(apiSecurity.getLoginUsuarioLogado(),
+				"Usuário de criação não encontrado.");
+
+		validarDuplicidade(grupo);
 
 		try {
 			grupo.setDtCadastro(new Date());
@@ -56,14 +63,44 @@ public class GrupoServiceImpl implements GrupoService {
 		return grupo;
 	}
 
+	private void validarGrupo(Grupo grupo) {
+		if (grupo == null) {
+			throw new ValidacaoException("Informar grupo.");
+		}
+		if (StringUtils.isBlank(grupo.getNome())) {
+			throw new ValidacaoException("Informar nome do grupo.");
+		}
+		if (StringUtils.isBlank(grupo.getDescricao())) {
+			throw new ValidacaoException("Informar descrição do grupo.");
+		}
+		if (grupo.getFlAtivo() == null) {
+			throw new ValidacaoException("Informar se grupo será ativo ou inativo.");
+		}
+	}
+
+	private void validarDuplicidade(Grupo grupo) {
+		try {
+			Optional<Grupo> grupoOptional = grupoRepository.findByNome(grupo.getNome());
+
+			if (grupoOptional.isPresent()) {
+				throw new ValidacaoException("Esse nome do grupo já existe.");
+			}
+		} catch (ValidacaoException e) {
+			log.debug("Esse nome do grupo já existe: {}.", grupo);
+			throw e;
+		} catch (Exception e) {
+			log.debug("Erro ao buscar grupo pelo nome: {}.", grupo);
+			throw new ApiException("Erro ao buscar grupo pelo nome.", e);
+		}
+	}
+
 	@Override
 	@Transactional
 	public Grupo atualizar(Grupo grupo) {
-		if (grupo == null) {
-			throw new ValidacaoException("Informe um grupo.");
-		}
+		validarGrupo(grupo);
 
-		Usuario usuarioAtualizacao = usuarioService.buscar(1L, "Usuário de atualização não encontrado.");
+		Usuario usuarioAtualizacao = usuarioService.buscarPorLogin(apiSecurity.getLoginUsuarioLogado(),
+				"Usuário de atualização não encontrado.");
 
 		try {
 			grupo.setDtAtualizacao(new Date());
@@ -102,6 +139,16 @@ public class GrupoServiceImpl implements GrupoService {
 			log.debug("Erro ao buscar grupo com o código: {}.", cdGrupo);
 			throw new ApiException("Erro ao buscar grupo com o código.", e);
 		}
+	}
+
+	@Override
+	public boolean isOwner(Long cdGrupo) {
+		Grupo grupo = buscar(cdGrupo);
+		Usuario usuarioLogado = usuarioService.buscarPorLogin(apiSecurity.getLoginUsuarioLogado());
+		if (grupo.getCdUsuarioCriacao() != null && grupo.getCdUsuarioCriacao().equals(usuarioLogado.getCdUsuario())) {
+			return true;
+		}
+		return false;
 	}
 
 }

@@ -41,15 +41,15 @@ INSERT INTO "OAUTH"."TB_APLICACAO"(
 	"FL_REFRESH_TOKEN")
 VALUES (
 	2, 
-	'GERENCIAMENTO_TAREFAS', 
-	'Aplicação front-end para o gerenciamento de tarefas.', 
+	'OAUTH_API', 
+	'Api do servidor oauth2.', 
 	now()::timestamp(0), 
 	1, 
 	TRUE, 
-	'FRONT_END', 
+	'BACK_END', 
 	'b', 
 	FALSE, 
-	86400, 
+	0, 
 	FALSE
 );
 

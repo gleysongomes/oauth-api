@@ -165,4 +165,15 @@ public class PermissaoUsuarioServiceImpl implements PermissaoUsuarioService {
 		}
 	}
 
+	@Override
+	public List<PermissaoUsuario> findByCdUsuarioAndFlAtivaIsTrueAndNomesApis(Long cdUsuario, String nomesApis) {
+		try {
+			return permissaoUsuarioRepository.findByCdUsuarioAndFlAtivaIsTrueAndNomesApis(cdUsuario, nomesApis);
+		} catch (Exception e) {
+			log.debug("Erro ao listar permissões por código do usuário {} e nomes das aplicações: {}.", cdUsuario,
+					nomesApis);
+			throw new ApiException("Erro ao listar permissões por código do usuário e nomes das aplicações.", e);
+		}
+	}
+
 }

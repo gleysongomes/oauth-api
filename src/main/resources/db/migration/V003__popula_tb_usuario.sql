@@ -8,5 +8,5 @@ INSERT INTO "OAUTH"."TB_USUARIO"(
 	"DT_CADASTRO", 
 	"CD_USUARIO_CRIACAO", 
 	"FL_ATIVO")
-VALUES (1, 'admin', 'admin@localhost', 'Admin', 'a', now()::timestamp(0), 1, TRUE);
+VALUES (1, 'admin', 'admin@localhost', 'Admin', '$2a$10$iOqf61qETMrvS5n7VgUnUOHx4IdqD4L/XfxmThBe9P2XB.XNLQ6bW', now()::timestamp(0), 1, TRUE);
 

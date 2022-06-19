@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import io.github.gleysongomes.oauth.model.Aplicacao;
 import io.github.gleysongomes.oauth.service.AplicacaoService;
+import io.github.gleysongomes.oauth.util.ConstantesUtil;
 import io.github.gleysongomes.oauth.webservice.helper.ResourceUriHelper;
 
 @ControllerAdvice
@@ -37,7 +38,7 @@ public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2Acces
 
 		HttpServletRequest req = ResourceUriHelper.getHttpServletRequest();
 
-		String nome = req.getParameter("nomeApp");
+		String nome = req.getParameter(ConstantesUtil.NOME_APP_PARAMETER_REQUEST);
 
 		Aplicacao aplicacao = aplicacaoService.buscarPorNome(nome);
 

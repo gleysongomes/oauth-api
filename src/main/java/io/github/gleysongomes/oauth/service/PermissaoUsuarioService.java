@@ -18,4 +18,6 @@ public interface PermissaoUsuarioService {
 	List<PermissaoUsuario> findByCdUsuarioAndFlAtivaIsTrue(Long cdUsuario);
 
 	void validarAtualizacao(Long cdPermissao, Long cdUsuario, PermissaoUsuarioInput permissaoUsuarioInput);
+
+	List<PermissaoUsuario> findByCdUsuarioAndFlAtivaIsTrueAndNomesApis(Long cdUsuario, String nomesApis);
 }

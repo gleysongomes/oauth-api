@@ -21,6 +21,7 @@ import io.github.gleysongomes.oauth.dto.mapping.GrupoMapping;
 import io.github.gleysongomes.oauth.mapper.GrupoMapper;
 import io.github.gleysongomes.oauth.model.Grupo;
 import io.github.gleysongomes.oauth.service.GrupoService;
+import io.github.gleysongomes.oauth.webservice.authorize.GrupoAuthorize;
 
 @RestController
 @RequestMapping(path = "/grupos", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,6 +37,7 @@ public class GrupoWebService {
 	}
 
 	@GetMapping
+	@GrupoAuthorize.Listar
 	public PageDTO<GrupoMapping> listar(GrupoFilter grupoFilter, @Valid PageDTO<GrupoMapping> pageDTO) {
 		PageDTO<GrupoMapping> grupos = grupoService.listar(grupoFilter, pageDTO);
 
@@ -44,6 +46,7 @@ public class GrupoWebService {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@GrupoAuthorize.Adicionar
 	public GrupoDTO adicionar(@RequestBody @Valid GrupoInput grupoInput) {
 		Grupo grupo = grupoMapper.toDomainObject(grupoInput);
 
@@ -55,6 +58,7 @@ public class GrupoWebService {
 	}
 
 	@GetMapping("/{cdGrupo}")
+	@GrupoAuthorize.Buscar
 	public GrupoDTO buscar(@PathVariable Long cdGrupo) {
 		Grupo grupo = grupoService.buscar(cdGrupo);
 
@@ -64,6 +68,7 @@ public class GrupoWebService {
 	}
 
 	@PutMapping("/{cdGrupo}")
+	@GrupoAuthorize.Atualizar
 	public GrupoDTO atualizar(@PathVariable Long cdGrupo, @RequestBody @Valid GrupoInput grupoInput) {
 		Grupo grupo = grupoService.buscar(cdGrupo);
 

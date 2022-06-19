@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import io.github.gleysongomes.oauth.dto.PageDTO;
 import io.github.gleysongomes.oauth.dto.input.filter.PermissaoFilter;
 import io.github.gleysongomes.oauth.dto.mapping.PermissaoMapping;
+import io.github.gleysongomes.oauth.dto.mapping.PermissaoResumoMapping;
 import io.github.gleysongomes.oauth.exception.ApiException;
 import io.github.gleysongomes.oauth.exception.NaoEncontradoException;
 import io.github.gleysongomes.oauth.exception.ValidacaoException;
@@ -117,6 +118,17 @@ public class PermissaoServiceImpl implements PermissaoService {
 		} catch (Exception e) {
 			log.debug("Erro ao buscar permissão com o código: {}.", cdPermissao);
 			throw new ApiException("Erro ao buscar permissão.", e);
+		}
+	}
+
+	@Override
+	public List<PermissaoResumoMapping> findPermissoesGrupoByCdUsuarioAndNomesApis(Long cdUsuario, String nomesApis) {
+		try {
+			return permissaoRepository.findPermissoesGrupoByCdUsuarioAndNomesApis(cdUsuario, nomesApis);
+		} catch (Exception e) {
+			log.debug("Erro ao listar permissões do grupo por código do usuário {} e nomes das aplicações: {}.", cdUsuario,
+					nomesApis);
+			throw new ApiException("Erro ao listar permissões do grupo por código do usuário e nomes das aplicações.", e);
 		}
 	}
 

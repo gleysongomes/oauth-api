@@ -29,5 +29,7 @@ public interface UsuarioService {
 
 	boolean isOwner(Long cdUsuario);
 
+	Usuario buscarPorLogin(String login, String mensagem);
+
 	Usuario buscarPorLogin(String login);
 }
