@@ -18,6 +18,8 @@
 		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
 		<spring-security-jwt.version>1.0.11.RELEASE</spring-security-jwt.version>
 		<spring-security-oauth2.version>2.3.7.RELEASE</spring-security-oauth2.version>
+		<jasperreports.version>6.6.0</jasperreports.version>
+		<poi-ooxml.version>3.17</poi-ooxml.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -102,6 +104,18 @@
 			<groupId>org.springframework.security.oauth</groupId>
 			<artifactId>spring-security-oauth2</artifactId>
 			<version>${spring-security-oauth2.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>${jasperreports.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi-ooxml.version}</version>
 		</dependency>
 	</dependencies>
 
