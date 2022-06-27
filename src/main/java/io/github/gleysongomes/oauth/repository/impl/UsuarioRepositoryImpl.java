@@ -60,10 +60,10 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryCustom {
 				+ "			U.\"CD_USUARIO_CRIACAO\", \n"
 				+ "			U.\"CD_USUARIO_ATUALIZACAO\", \n"
 				+ "			U.\"FL_ATIVO\", \n"
-				+ "			ROW_NUMBER () OVER () LINHA \n"
+				+ "			ROW_NUMBER () OVER (ORDER BY U.\"CD_USUARIO\") LINHA \n"
 				+ "		FROM \"OAUTH\".\"TB_USUARIO\" U \n"
 				+ "		WHERE 1 = 1 \n"  + filtro.toString()
-				+ "		ORDER BY U.\"CD_USUARIO\") TA \n"
+				+ "	) TA \n"
 				+ "WHERE TA.LINHA > :pageStart \n"
 				+ "	AND TA.LINHA <= :pageEnd";
 		// @formatter:on
