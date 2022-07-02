@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.gleysongomes.oauth.dto.input.filter.GrupoFilter;
 import io.github.gleysongomes.oauth.dto.input.filter.UsuarioFilter;
+import io.github.gleysongomes.oauth.dto.mapping.ReportGrupoMapping;
 import io.github.gleysongomes.oauth.dto.mapping.ReportUsuarioMapping;
 import io.github.gleysongomes.oauth.service.ReportService;
 import io.github.gleysongomes.oauth.webservice.helper.ReportHelper;
@@ -20,16 +22,26 @@ public class ReportsWebService {
 
 	private final ReportService<ReportUsuarioMapping, UsuarioFilter> reportUsuarioService;
 
+	private final ReportService<ReportGrupoMapping, GrupoFilter> reportGrupoService;
+
 	public ReportsWebService(ReportHelper reportHelper,
-			@Qualifier("reportUsuarioService") ReportService<ReportUsuarioMapping, UsuarioFilter> reportUsuarioService) {
+			@Qualifier("reportUsuarioService") ReportService<ReportUsuarioMapping, UsuarioFilter> reportUsuarioService,
+			@Qualifier("reportGrupoService") ReportService<ReportGrupoMapping, GrupoFilter> reportGrupoService) {
 		this.reportHelper = reportHelper;
 		this.reportUsuarioService = reportUsuarioService;
+		this.reportGrupoService = reportGrupoService;
 	}
 
 	@GetMapping("/usuarios")
 	public void reportUsuarios(UsuarioFilter usuarioFilter) {
 		Map<String, Object> params = reportHelper.getDefaultParam(usuarioFilter);
 		reportHelper.getReport(reportUsuarioService, params, usuarioFilter);
+	}
+
+	@GetMapping("/grupos")
+	public void reportGrupos(GrupoFilter grupoFilter) {
+		Map<String, Object> params = reportHelper.getDefaultParam(grupoFilter);
+		reportHelper.getReport(reportGrupoService, params, grupoFilter);
 	}
 
 }

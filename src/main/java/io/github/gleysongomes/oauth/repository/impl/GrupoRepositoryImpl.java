@@ -56,12 +56,12 @@ public class GrupoRepositoryImpl implements GrupoRepositoryCustom {
 				+ "			GR.\"FL_ATIVO\", \n"
 				+ "			UC.\"NOME\" NM_USUARIO_CRIACAO, \n"
 				+ "			UA.\"NOME\" NM_USUARIO_ATUALIZACAO, \n"
-				+ "			ROW_NUMBER () OVER () LINHA \n"
+				+ "			ROW_NUMBER () OVER (ORDER BY GR.\"CD_GRUPO\") LINHA \n"
 				+ "		FROM \"OAUTH\".\"TB_GRUPO\" GR \n"
 				+ "		JOIN \"OAUTH\".\"TB_USUARIO\" UC ON (GR.\"CD_USUARIO_CRIACAO\" = UC.\"CD_USUARIO\") \n"
 				+ "		LEFT JOIN \"OAUTH\".\"TB_USUARIO\" UA ON (GR.\"CD_USUARIO_ATUALIZACAO\" = UA.\"CD_USUARIO\") \n"
 				+ "		WHERE 1 = 1 \n"  + filtro.toString()
-				+ "		ORDER BY GR.\"CD_GRUPO\") TA \n"
+				+ "	) TA \n"
 				+ "WHERE TA.LINHA > :pageStart \n"
 				+ "	AND TA.LINHA <= :pageEnd ";
 		// @formatter:on
