@@ -16,6 +16,12 @@ public @interface GrupoAuthorize {
 	public @interface Listar {
 	}
 
+	@PreAuthorize("@apiSecurity.temEscopoLeitura() and hasAuthority('RELATORIO_GRUPO')")
+	@Retention(RUNTIME)
+	@Target(METHOD)
+	public @interface Relatorio {
+	}
+
 	@PreAuthorize("@apiSecurity.temEscopoLeitura() and hasAuthority('BUSCAR_GRUPO')")
 	@Retention(RUNTIME)
 	@Target(METHOD)

@@ -12,6 +12,8 @@ import io.github.gleysongomes.oauth.dto.input.filter.UsuarioFilter;
 import io.github.gleysongomes.oauth.dto.mapping.ReportGrupoMapping;
 import io.github.gleysongomes.oauth.dto.mapping.ReportUsuarioMapping;
 import io.github.gleysongomes.oauth.service.ReportService;
+import io.github.gleysongomes.oauth.webservice.authorize.GrupoAuthorize;
+import io.github.gleysongomes.oauth.webservice.authorize.UsuarioAuthorize;
 import io.github.gleysongomes.oauth.webservice.helper.ReportHelper;
 
 @RestController
@@ -33,12 +35,14 @@ public class ReportsWebService {
 	}
 
 	@GetMapping("/usuarios")
+	@UsuarioAuthorize.Relatorio
 	public void reportUsuarios(UsuarioFilter usuarioFilter) {
 		Map<String, Object> params = reportHelper.getDefaultParam(usuarioFilter);
 		reportHelper.getReport(reportUsuarioService, params, usuarioFilter);
 	}
 
 	@GetMapping("/grupos")
+	@GrupoAuthorize.Relatorio
 	public void reportGrupos(GrupoFilter grupoFilter) {
 		Map<String, Object> params = reportHelper.getDefaultParam(grupoFilter);
 		reportHelper.getReport(reportGrupoService, params, grupoFilter);

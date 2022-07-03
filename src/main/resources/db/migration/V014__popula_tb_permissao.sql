@@ -100,3 +100,23 @@ INSERT INTO "OAUTH"."TB_PERMISSAO"(
 	"FL_ATIVA")
 VALUES (10, 'EXCLUIR_GRUPO', 'Permite excluir grupo.', now()::timestamp(0), 2, 1, TRUE);
 
+INSERT INTO "OAUTH"."TB_PERMISSAO"(
+	"CD_PERMISSAO", 
+	"NOME", 
+	"DESCRICAO", 
+	"DT_CADASTRO", 
+	"CD_APLICACAO", 
+	"CD_USUARIO_CRIACAO", 
+	"FL_ATIVA")
+VALUES (11, 'RELATORIO_USUARIO', 'Permite visualizar relatório de usuários.', now()::timestamp(0), 2, 1, TRUE);
+
+INSERT INTO "OAUTH"."TB_PERMISSAO"(
+	"CD_PERMISSAO", 
+	"NOME", 
+	"DESCRICAO", 
+	"DT_CADASTRO", 
+	"CD_APLICACAO", 
+	"CD_USUARIO_CRIACAO", 
+	"FL_ATIVA")
+VALUES (12, 'RELATORIO_GRUPO', 'Permite visualizar relatório de grupos.', now()::timestamp(0), 2, 1, TRUE);
+
