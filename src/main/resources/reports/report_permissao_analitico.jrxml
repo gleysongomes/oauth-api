@@ -429,6 +429,12 @@
 						<jr:columnHeader height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="66" height="30" uuid="8b51959c-2702-408b-980a-d8fa9711e3ff"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[CÓDIGO]]></text>
 							</staticText>
@@ -436,6 +442,12 @@
 						<jr:detailCell height="30">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="66" height="30" uuid="094bcd8c-f24c-4b13-be92-bdcd50dc68ea"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textFieldExpression><![CDATA[$F{cdPermissao}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -445,6 +457,12 @@
 						<jr:columnHeader height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="66" height="30" uuid="520125fc-70bb-4b3b-a5a3-0f935170edfb"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[NOME]]></text>
 							</staticText>
@@ -452,6 +470,12 @@
 						<jr:detailCell height="30">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="66" height="30" uuid="cedbb576-e2a6-4db3-b732-9a7a153c4d97"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -461,6 +485,12 @@
 						<jr:columnHeader height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="66" height="30" uuid="1f467d9e-507d-43c2-8b8a-3fc49793f7f6"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[DESCRIÇÃO]]></text>
 							</staticText>
@@ -468,6 +498,12 @@
 						<jr:detailCell height="30">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="66" height="30" uuid="1abf73a3-70ed-442a-84cd-fdb8a19bd468"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -477,6 +513,12 @@
 						<jr:columnHeader height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="86" height="30" uuid="e976cede-989f-43a5-8e98-49c5fd0ddb7e"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[DT CADASTRO]]></text>
 							</staticText>
@@ -484,6 +526,12 @@
 						<jr:detailCell height="30">
 							<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="86" height="30" uuid="a0984b7d-e6f6-4c89-8523-8ea8cc3441d1"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textFieldExpression><![CDATA[$F{dtCadastro}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -493,6 +541,12 @@
 						<jr:columnHeader height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="110" height="30" uuid="ba3086ce-b68b-402f-89a6-c98655d8497a"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[DT ATUALIZAÇÃO]]></text>
 							</staticText>
@@ -500,6 +554,12 @@
 						<jr:detailCell height="30">
 							<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="110" height="30" uuid="db4c03a2-fd0c-4a4d-b1d1-065d10b6ecf5"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textFieldExpression><![CDATA[$F{dtAtualizacao}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -509,6 +569,12 @@
 						<jr:columnHeader height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="66" height="30" isRemoveLineWhenBlank="true" uuid="ac4c0dbd-fceb-4430-9460-767924dd0aee"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[ATIVA]]></text>
 							</staticText>
@@ -516,6 +582,12 @@
 						<jr:detailCell height="30">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="66" height="30" uuid="5bcbfdf0-0b2a-45cc-b203-2bd2fe569d1f"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textFieldExpression><![CDATA[$F{flAtiva} != null ? ($F{flAtiva} ? "Sim" : "Não") : ""]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -525,6 +597,12 @@
 						<jr:columnHeader height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="80" height="30" uuid="fe2eddd3-7de3-4c45-854f-cd4c94eecdc0"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[APLICAÇÃO]]></text>
 							</staticText>
@@ -532,6 +610,12 @@
 						<jr:detailCell height="30">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="80" height="30" uuid="9fb85ed7-1969-4d2c-8851-a3ebe14a7d57"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textFieldExpression><![CDATA[$F{nmAplicacao}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -541,6 +625,12 @@
 						<jr:columnHeader height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="114" height="30" uuid="521d6782-eae8-4c48-8928-b7fdd5d58bbd"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[USUÁRIO CRIAÇÃO]]></text>
 							</staticText>
@@ -548,6 +638,12 @@
 						<jr:detailCell height="30">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="114" height="30" uuid="ad20abc1-aad8-47d7-951d-b0239f80173e"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textFieldExpression><![CDATA[$F{nmUsuarioCriacao}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -557,6 +653,12 @@
 						<jr:columnHeader height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="130" height="30" uuid="2def5e69-2cd8-4cb5-a5bc-91974c795985"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[USUÁRIO ATUALIZAÇÃO]]></text>
 							</staticText>
@@ -564,6 +666,12 @@
 						<jr:detailCell height="30">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="130" height="30" uuid="54cf6b08-13b0-49c1-9443-23b243f5e0a7"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
 								<textFieldExpression><![CDATA[$F{nmUsuarioAtualizacao}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>

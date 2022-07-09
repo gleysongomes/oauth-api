@@ -386,10 +386,11 @@
 				</jr:table>
 			</componentElement>
 		</band>
-		<band height="233">
+		<band height="78">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<printWhenExpression><![CDATA["csv".equalsIgnoreCase($P{tipoArquivo})]]></printWhenExpression>
 			<componentElement>
-				<reportElement x="1" y="33" width="799" height="97" uuid="4a58a53f-507d-4ac1-a609-12cefbb6ebb6">
+				<reportElement x="1" y="5" width="799" height="67" uuid="4a58a53f-507d-4ac1-a609-12cefbb6ebb6">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -416,7 +417,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="66" uuid="2c23d3ce-3ec8-40b6-9868-ce44a38be5db">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="66" height="30" uuid="520125fc-70bb-4b3b-a5a3-0f935170edfb"/>
@@ -427,12 +428,12 @@
 						<jr:detailCell style="Table_TD" height="30">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="66" height="30" uuid="cedbb576-e2a6-4db3-b732-9a7a153c4d97"/>
-								<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="66" uuid="1f0ff177-1d23-4fb4-891a-d169807d9714">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="66" height="30" uuid="1f467d9e-507d-43c2-8b8a-3fc49793f7f6"/>
@@ -448,7 +449,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="86" uuid="4a369921-55ea-411c-b827-f41f9c41769f">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="86" height="30" uuid="e976cede-989f-43a5-8e98-49c5fd0ddb7e"/>
@@ -464,7 +465,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="110" uuid="1fa7cb7d-153e-4f85-a69c-bdf8df7652eb">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="110" height="30" uuid="ba3086ce-b68b-402f-89a6-c98655d8497a"/>
@@ -496,7 +497,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="114" uuid="d2ee7c07-395f-4913-9ce5-ed4c7a1bc817">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="114" height="30" uuid="521d6782-eae8-4c48-8928-b7fdd5d58bbd"/>
@@ -512,7 +513,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="130" uuid="e87fd5a1-f2f7-4a45-a3df-60c6a9a43ab3">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="130" height="30" uuid="2def5e69-2cd8-4cb5-a5bc-91974c795985"/>
@@ -535,9 +536,9 @@
 		<band height="17" splitType="Stretch">
 			<printWhenExpression><![CDATA[!"csv".equalsIgnoreCase($P{tipoArquivo})]]></printWhenExpression>
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="1" y="0" width="807" height="2" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1"/>
+				<reportElement positionType="FixRelativeToBottom" x="1" y="8" width="807" height="2" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1"/>
 				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
+					<pen lineWidth="0.5" lineColor="#000000"/>
 				</graphicElement>
 			</line>
 		</band>

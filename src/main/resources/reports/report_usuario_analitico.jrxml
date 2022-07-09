@@ -389,10 +389,11 @@
 				</jr:table>
 			</componentElement>
 		</band>
-		<band height="233">
+		<band height="78">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<printWhenExpression><![CDATA["csv".equalsIgnoreCase($P{tipoArquivo})]]></printWhenExpression>
 			<componentElement>
-				<reportElement x="1" y="33" width="799" height="97" uuid="4a58a53f-507d-4ac1-a609-12cefbb6ebb6">
+				<reportElement x="1" y="4" width="799" height="67" uuid="4a58a53f-507d-4ac1-a609-12cefbb6ebb6">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -545,9 +546,11 @@
 		<band height="17" splitType="Stretch">
 			<printWhenExpression><![CDATA[!"csv".equalsIgnoreCase($P{tipoArquivo})]]></printWhenExpression>
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="1" y="0" width="807" height="2" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1"/>
+				<reportElement positionType="FixRelativeToBottom" x="1" y="8" width="807" height="2" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
 				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
+					<pen lineWidth="0.5" lineColor="#000000"/>
 				</graphicElement>
 			</line>
 		</band>
