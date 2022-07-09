@@ -17,6 +17,7 @@ import io.github.gleysongomes.oauth.dto.input.filter.ReportFilter;
 import io.github.gleysongomes.oauth.exception.ApiException;
 import io.github.gleysongomes.oauth.service.ReportService;
 import io.github.gleysongomes.oauth.util.ReportsUtil;
+import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -65,6 +66,12 @@ public class ReportHelper {
 		params.put(ReportsUtil.REPORTS_DIR.toString(), reportsDir);
 		params.put(ReportsUtil.IMAGES_DIR.toString(), imagesDir);
 
+		tipoArquivo = tipoArquivo.toLowerCase();
+
+		if ("csv".equals(tipoArquivo) || "xls".equals(tipoArquivo) || "xlsx".equals(tipoArquivo)) {
+			params.put(JRParameter.IS_IGNORE_PAGINATION, true);
+		}
+
 		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(source);
 
 		InputStream inputStream = this.getClass()
@@ -79,7 +86,7 @@ public class ReportHelper {
 
 		ServletOutputStream output = response.getOutputStream();
 
-		switch (tipoArquivo.toLowerCase()) {
+		switch (tipoArquivo) {
 		case "pdf":
 			response.setContentType(MediaType.APPLICATION_PDF_VALUE);
 			JRPdfExporter pdf = new JRPdfExporter();

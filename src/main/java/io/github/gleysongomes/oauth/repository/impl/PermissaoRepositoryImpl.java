@@ -60,13 +60,13 @@ public class PermissaoRepositoryImpl implements PermissaoRepositoryCustom {
 				+ "			A.\"NOME\" NM_APLICACAO, \n"
 				+ "			UC.\"NOME\" NM_USUARIO_CRIACAO, \n"
 				+ "			UA.\"NOME\" NM_USUARIO_ATUALIZACAO, \n"
-				+ "			ROW_NUMBER () OVER () LINHA \n"
+				+ "			ROW_NUMBER () OVER (ORDER BY P.\"CD_PERMISSAO\") LINHA \n"
 				+ "		FROM \"OAUTH\".\"TB_PERMISSAO\" P \n"
 				+ "		JOIN \"OAUTH\".\"TB_APLICACAO\" A ON (P.\"CD_APLICACAO\" = A.\"CD_APLICACAO\") \n"
 				+ "		JOIN \"OAUTH\".\"TB_USUARIO\" UC ON (P.\"CD_USUARIO_CRIACAO\" = UC.\"CD_USUARIO\") \n"
 				+ "		LEFT JOIN \"OAUTH\".\"TB_USUARIO\" UA ON (P.\"CD_USUARIO_ATUALIZACAO\" = UA.\"CD_USUARIO\") \n"
 				+ "		WHERE 1 = 1 \n"  + filtro.toString()
-				+ "		ORDER BY P.\"CD_PERMISSAO\") TA \n"
+				+ "	) TA \n"
 				+ "WHERE TA.LINHA > :pageStart \n"
 				+ "	AND TA.LINHA <= :pageEnd ";
 		// @formatter:on

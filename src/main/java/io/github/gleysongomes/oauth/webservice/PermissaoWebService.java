@@ -21,6 +21,7 @@ import io.github.gleysongomes.oauth.dto.mapping.PermissaoMapping;
 import io.github.gleysongomes.oauth.mapper.PermissaoMapper;
 import io.github.gleysongomes.oauth.model.Permissao;
 import io.github.gleysongomes.oauth.service.PermissaoService;
+import io.github.gleysongomes.oauth.webservice.authorize.PermissaoAuthorize;
 
 @RestController
 @RequestMapping(path = "/permissoes", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,6 +37,7 @@ public class PermissaoWebService {
 	}
 
 	@GetMapping
+	@PermissaoAuthorize.Listar
 	public PageDTO<PermissaoMapping> listar(PermissaoFilter permissaoFilter, @Valid PageDTO<PermissaoMapping> pageDTO) {
 		PageDTO<PermissaoMapping> permissoes = permissaoService.listar(permissaoFilter, pageDTO);
 
@@ -44,6 +46,7 @@ public class PermissaoWebService {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@PermissaoAuthorize.Adicionar
 	public PermissaoDTO adicionar(@RequestBody @Valid PermissaoInput gupoInput) {
 		Permissao permissao = permissaoMapper.toDomainObject(gupoInput);
 
@@ -55,6 +58,7 @@ public class PermissaoWebService {
 	}
 
 	@GetMapping("/{cdPermissao}")
+	@PermissaoAuthorize.Buscar
 	public PermissaoDTO buscar(@PathVariable Long cdPermissao) {
 		Permissao permissao = permissaoService.buscar(cdPermissao);
 
@@ -64,6 +68,7 @@ public class PermissaoWebService {
 	}
 
 	@PutMapping("/{cdPermissao}")
+	@PermissaoAuthorize.Atualizar
 	public PermissaoDTO atualizar(@PathVariable Long cdPermissao, @RequestBody @Valid PermissaoInput permissaoInput) {
 		Permissao permissao = permissaoService.buscar(cdPermissao);
 

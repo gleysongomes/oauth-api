@@ -21,6 +21,7 @@ import io.github.gleysongomes.oauth.dto.mapping.AplicacaoMapping;
 import io.github.gleysongomes.oauth.mapper.AplicacaoMapper;
 import io.github.gleysongomes.oauth.model.Aplicacao;
 import io.github.gleysongomes.oauth.service.AplicacaoService;
+import io.github.gleysongomes.oauth.webservice.authorize.AplicacaoAuthorize;
 
 @RestController
 @RequestMapping(path = "/aplicacoes", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,6 +37,7 @@ public class AplicacaoWebService {
 	}
 
 	@GetMapping
+	@AplicacaoAuthorize.Listar
 	public PageDTO<AplicacaoMapping> listar(AplicacaoFilter aplicacaoFilter, @Valid PageDTO<AplicacaoMapping> paginacaoTO) {
 		PageDTO<AplicacaoMapping> aplicacoes = aplicacaoService.listar(aplicacaoFilter, paginacaoTO);
 
@@ -44,6 +46,7 @@ public class AplicacaoWebService {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@AplicacaoAuthorize.Adicionar
 	public AplicacaoDTO adicionar(@RequestBody @Valid AplicacaoInput gupoInput) {
 		Aplicacao aplicacao = aplicacaoMapper.toDomainObject(gupoInput);
 
@@ -55,6 +58,7 @@ public class AplicacaoWebService {
 	}
 
 	@GetMapping("/{cdAplicacao}")
+	@AplicacaoAuthorize.Buscar
 	public AplicacaoDTO buscar(@PathVariable Long cdAplicacao) {
 		Aplicacao aplicacao = aplicacaoService.buscar(cdAplicacao);
 
@@ -64,6 +68,7 @@ public class AplicacaoWebService {
 	}
 
 	@PutMapping("/{cdAplicacao}")
+	@AplicacaoAuthorize.Atualizar
 	public AplicacaoDTO atualizar(@PathVariable Long cdAplicacao, @RequestBody @Valid AplicacaoInput aplicacaoInput) {
 		Aplicacao aplicacao = aplicacaoService.buscar(cdAplicacao);
 
