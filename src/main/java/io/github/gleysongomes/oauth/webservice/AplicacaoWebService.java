@@ -38,8 +38,8 @@ public class AplicacaoWebService {
 
 	@GetMapping
 	@AplicacaoAuthorize.Listar
-	public PageDTO<AplicacaoMapping> listar(AplicacaoFilter aplicacaoFilter, @Valid PageDTO<AplicacaoMapping> paginacaoTO) {
-		PageDTO<AplicacaoMapping> aplicacoes = aplicacaoService.listar(aplicacaoFilter, paginacaoTO);
+	public PageDTO<AplicacaoMapping> listar(AplicacaoFilter aplicacaoFilter, @Valid PageDTO<AplicacaoMapping> pageDTO) {
+		PageDTO<AplicacaoMapping> aplicacoes = aplicacaoService.listar(aplicacaoFilter, pageDTO);
 
 		return aplicacoes;
 	}

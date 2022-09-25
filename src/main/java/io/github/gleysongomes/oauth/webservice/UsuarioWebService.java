@@ -2,8 +2,10 @@ package io.github.gleysongomes.oauth.webservice;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,9 +34,12 @@ public class UsuarioWebService {
 
 	private final UsuarioMapper usuarioMapper;
 
-	public UsuarioWebService(UsuarioService usuarioService, UsuarioMapper usuarioMapper) {
+	private final PasswordEncoder passwordEncoder;
+
+	public UsuarioWebService(UsuarioService usuarioService, UsuarioMapper usuarioMapper, PasswordEncoder passwordEncoder) {
 		this.usuarioService = usuarioService;
 		this.usuarioMapper = usuarioMapper;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@GetMapping
@@ -51,6 +56,7 @@ public class UsuarioWebService {
 	public UsuarioDTO adicionar(@RequestBody @Valid AdicaoUsuarioInput adicaoUsuarioInput) {
 		usuarioService.validarConfirmacaoSenha(adicaoUsuarioInput.getSenha(), adicaoUsuarioInput.getSenhaConfirmada());
 
+		adicaoUsuarioInput.setSenha(passwordEncoder.encode(adicaoUsuarioInput.getSenha()));
 		Usuario usuario = usuarioMapper.toDomainObject(adicaoUsuarioInput);
 
 		usuarioService.validarAdicaoUsuario(usuario);
@@ -82,6 +88,12 @@ public class UsuarioWebService {
 		Usuario usuario = usuarioService.buscar(cdUsuario);
 
 		usuarioService.validarSenhaAtual(atualizacaoUsuarioInput.getSenhaAtual(), usuario.getHashSenha());
+
+		if (StringUtils.isNotBlank(atualizacaoUsuarioInput.getSenhaAtual())
+				&& StringUtils.isNotBlank(atualizacaoUsuarioInput.getNovaSenha())
+				&& StringUtils.isNotBlank(atualizacaoUsuarioInput.getNovaSenhaConfirmada())) {
+			atualizacaoUsuarioInput.setNovaSenha(passwordEncoder.encode(atualizacaoUsuarioInput.getNovaSenha()));
+		}
 
 		usuarioMapper.copyToDomainObject(atualizacaoUsuarioInput, usuario);
 

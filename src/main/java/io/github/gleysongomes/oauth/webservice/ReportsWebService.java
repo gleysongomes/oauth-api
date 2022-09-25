@@ -34,7 +34,7 @@ public class ReportsWebService {
 	public ReportsWebService(ReportHelper reportHelper,
 			@Qualifier("reportUsuarioService") ReportService<ReportUsuarioMapping, UsuarioFilter> reportUsuarioService,
 			@Qualifier("reportGrupoService") ReportService<ReportGrupoMapping, GrupoFilter> reportGrupoService,
-			ReportService<ReportPermissaoMapping, PermissaoFilter> reportPermissaoService) {
+			@Qualifier("reportPermissaoService") ReportService<ReportPermissaoMapping, PermissaoFilter> reportPermissaoService) {
 		this.reportHelper = reportHelper;
 		this.reportUsuarioService = reportUsuarioService;
 		this.reportGrupoService = reportGrupoService;
